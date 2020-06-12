@@ -1,0 +1,23 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": ["go"],
+    "diagnostic.signOffset": 999999,
+    "diagnostic.highlightOffset": 999999,
+    "diagnostic.refreshOnInsertMode": true,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.warningSign": "⚠",
+    "diagnostic.errorSign": "✖",
+    "diagnostic.infoSign": "ღ",
+    "diagnostic.hintSign": "ஐ",
+	"languageserver": {
+		"terraform": {
+			"command": "terraform-ls",
+			"args": ["serve"],
+			"filetypes": [
+				"terraform",
+				"tf"
+			],
+			"initializationOptions": {},
+			"settings": {}
+		}
+  	}
+}
