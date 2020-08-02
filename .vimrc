@@ -1,73 +1,138 @@
 " .vimrc
 " Vincent Van der Kussen vim config
 "
-
-" -- Vundle configuration --------------------------
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim' 
+" -- Plugins (using vim-plug)
+call plug#begin('~/.vim/plugged')
+Plug 'VundleVim/Vundle.vim' 
 
 " -- Linting
 "Plugin 'w0rp/ale'
-Plugin 'nlknguyen/cloudformation-syntax.vim'
+Plug 'nlknguyen/cloudformation-syntax.vim'
 
 " -- Status line 
 "Plugin 'itchyny/lightline.vim'
-Plugin 'itchyny/vim-gitbranch'
+Plug 'itchyny/vim-gitbranch'
 
 " -- Gutter
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 " -- Files and fuzzy finder
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 
 " -- Better Python identation
-Plugin 'vim-scripts/indentpython.vim'
+Plug 'vim-scripts/indentpython.vim'
 
 " Pairing quotes, brackets, ..
 "Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " -- Autocompletion
-"Plugin 'Valloric/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " deps
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-" python deps
-Plugin 'davidhalter/jedi-vim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+" Python completion
+Plug 'davidhalter/jedi-vim'
 
 " -- Snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'MarcWeber/vim-addon-mw-utils'
+Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+"Plug 'MarcWeber/vim-addon-mw-utils'
 
 " -- Colors
-Plugin 'chriskempson/base16-vim'
-
-" -- Golang
-"Plugin 'fatih/vim-go.git'
+Plug 'chriskempson/base16-vim'
 
 " -- Markdown
-Plugin 'iamcco/markdown-preview.vim'
+Plug 'iamcco/markdown-preview.vim'
 
 " -- Terraform
-Plugin 'hashivim/vim-terraform'
+Plug 'hashivim/vim-terraform'
 
 " -- Icons (needs nerd icons)
-Plugin 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 "-- Git
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
-"-- CoC
-Plugin 'neoclide/coc.nvim'
+" --ALE
+"Plug 'dense-analysis/ale'
 
-"-- Buffers in Tabline
-Plugin 'ap/vim-bufftabline'
 
-call vundle#end()
+call plug#end()
+"
+"" -- Vundle configuration --------------------------
+"set nocompatible
+"filetype off
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+"Plugin 'VundleVim/Vundle.vim' 
+"
+"" -- Linting
+""Plugin 'w0rp/ale'
+"Plugin 'nlknguyen/cloudformation-syntax.vim'
+"
+"" -- Status line 
+""Plugin 'itchyny/lightline.vim'
+"Plugin 'itchyny/vim-gitbranch'
+"
+"" -- Gutter
+"Plugin 'airblade/vim-gitgutter'
+"
+"" -- Files and fuzzy finder
+"Plugin 'junegunn/fzf.vim'
+"
+"" -- Better Python identation
+"Plugin 'vim-scripts/indentpython.vim'
+"
+"" Pairing quotes, brackets, ..
+""Plugin 'jiangmiao/auto-pairs'
+"Plugin 'tpope/vim-surround'
+"
+"" -- Autocompletion
+""Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Shougo/deoplete.nvim'
+"" deps
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'
+"" Python completion
+"Plugin 'davidhalter/jedi-vim'
+"Plugin 'deoplete-plugins/deoplete-jedi'
+"" Golang completion
+"Plugin 'deoplete-plugins/deoplete-go'
+"
+"" -- Snippets
+"Plugin 'SirVer/ultisnips'
+""Plugin 'honza/vim-snippets'
+""Plugin 'MarcWeber/vim-addon-mw-utils'
+"
+"" -- Colors
+"Plugin 'chriskempson/base16-vim'
+"
+"" -- Golang
+""Plugin 'fatih/vim-go.git'
+"
+"" -- Markdown
+"Plugin 'iamcco/markdown-preview.vim'
+"
+"" -- Terraform
+"Plugin 'hashivim/vim-terraform'
+"
+"" -- Icons (needs nerd icons)
+"Plugin 'ryanoasis/vim-devicons'
+"
+""-- Git
+"Plugin 'tpope/vim-fugitive'
+"
+"" --ALE
+"Plugin 'dense-analysis/ale'
+"
+""-- CoC
+"" Plugin 'neoclide/coc.nvim'
+"
+""-- Buffers in Tabline
+""Plugin 'ap/vim-bufftabline'
+"
+"call vundle#end()
 
 " -- testing stuff
 " ----------------
@@ -360,35 +425,37 @@ let g:netrw_banner = 0
 nnoremap <leader>n :Lexplore<cr>
 
 
-" -----------------------------------------------------------------------------
-" ALE Linting
-" -----------------------------------------------------------------------------
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '.'
-" let g:ale_sign_error = '⤫'
-" let g:ale_sign_warning = '⚠'
-let g:ale_lint_on_text_changed = 1
+"" -----------------------------------------------------------------------------
+"" ALE Linting
+"" -----------------------------------------------------------------------------
+"let g:ale_sign_column_always = 1
+"let g:ale_sign_error = '●'
+"let g:ale_sign_warning = '.'
+"" let g:ale_sign_error = '⤫'
+"" let g:ale_sign_warning = '⚠'
+"let g:ale_lint_on_text_changed = 1
+"
+""let g:ale_linter_aliases = {'yaml': ['cloudformation', 'yaml']}
+"highlight ALEWarning ctermbg=DarkMagenta
+"highlight ALEError ctermfg=Magenta
+"let g:ale_linters = { 
+"            \ 'python': ['flake8'],
+"            \}
+"let g:ale_python_pycodestyle_options = '--ignore=C0111 --ignore=C0103 --max-line-length=100'
+"let g:ale_python_auto_pipenv = 1
+"let g:ale_python_pylint_executable = 'pipenv'
+"let g:ale_python_pylint_change_directory = 0
+"let g:ale_python_pylint_options = '--disable=C0111'
+"let g:ale_python_flake8_options = '--ignore=F841' 
 
-"let g:ale_linter_aliases = {'yaml': ['cloudformation', 'yaml']}
-highlight ALEWarning ctermbg=DarkMagenta
-highlight ALEError ctermfg=Magenta
-let g:ale_linters = { 
-            \ 'python': ['flake8'],
-            \}
-let g:ale_python_pycodestyle_options = '--ignore=C0111 --ignore=C0103 --max-line-length=100'
-let g:ale_python_auto_pipenv = 1
-let g:ale_python_pylint_executable = 'pipenv'
-let g:ale_python_pylint_change_directory = 0
-let g:ale_python_pylint_options = '--disable=C0111'
-let g:ale_python_flake8_options = '--ignore=F841' 
 
 "" -----------------------------------------------------------------------------
 "" deoplete configuration. <Switched to CoC>
 "" -----------------------------------------------------------------------------
 "let g:deoplete#enable_at_startup = 1
-"let g:deoplete#enable_smart_case = 1
-"let g:deoplete#auto_complete_delay = 100
+"call deoplete#custom#option('smart_case', v:true) 
+"call deoplete#custom#option('auto_complete_delay', 100) 
+"call deoplete#custom#option('auto_complete', v:true)
 "
 "" deoplete tab-complete
 "inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -401,10 +468,10 @@ let g:ale_python_flake8_options = '--ignore=F841'
 "" Go
 "let g:go_highlight_types = 1
 "let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-
-
-" deoplete language configuration
-" https://github.com/Shougo/deoplete.nvim/wiki/Completion-Sources
+"
+"
+"" deoplete language configuration
+"" https://github.com/Shougo/deoplete.nvim/wiki/Completion-Sources
 " -----------------------------------------------------------------------------
 
 " Copy Pasting stuff
@@ -470,6 +537,33 @@ highlight CocWarningHighlight ctermfg=Red  guifg=#ff0000
 highlight CocInfoHighlight ctermfg=Red  guifg=#ff0000
 highlight CocHintHighlight ctermfg=Red  guifg=#ff0000
 
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
 " -----------------------------------------------------------------------------
 " Markdown Preview
 " -----------------------------------------------------------------------------
@@ -512,7 +606,7 @@ highlight pythonException       cterm=bold gui=bold
 highlight pythonBrackets        ctermfg=183 guifg=#d7afff
 highlight MatchParen            cterm=bold ctermfg=cyan
 
-au BufNewFile,BufRead *.py set foldmethod=indent
+"au BufNewFile,BufRead *.py set foldmethod=indent
 
 
 " -- Support Deoplete/neovim in pipenv
@@ -550,6 +644,11 @@ function! GetYamlIndent()
     return indent
   endif
 endfunction
+
+
+" -- Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " -----------------------------------------------------------------------------
 " File Automation
