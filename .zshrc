@@ -40,7 +40,8 @@ alias zoolite='cd ~/zoolite'
 alias gi='~/.local/bin/grv'
 alias ls='ls -l --group-directories-first --color'
 alias aws-instances="aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | .Tags[]|select(.Key=="Name")|.Value'"
-alias mydots='/usr/bin/git --git-dir=$HOME/.mydots/ --work-tree=$HOME'
+alias mydots='/usr/bin/git --git-dir=$HOME/.mydots/ --work-tree=$HOME $@' 
+alias vim=nvim
 
 # -- ssh-agent ----------------------------------------------------------------
 SSH_ENV="$HOME/.ssh/environment"
@@ -65,7 +66,7 @@ else
 fi
 
 # --  AWS ---------------------------------------------------------------------
-# Update prompt with AWS Profile
+# Update prompt with AWS Profile (disabled as it is available in starship.rs
 #function aws_prof {
 #  local profile="${AWS_PROFILE}"
 #

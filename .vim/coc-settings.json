@@ -19,5 +19,9 @@
 			"initializationOptions": {},
 			"settings": {}
 		}
-  	}
+  	},
+    "python.jediEnabled": false,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [],
+    "python.autoComplete.addBrackets": true
 }

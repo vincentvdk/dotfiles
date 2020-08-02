@@ -71,6 +71,9 @@ output * bg /usr/share/backgrounds/default.png fill
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    
+    # wofi as application launcher
+    set $menu wofi --show drun,run
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -217,4 +220,4 @@ bar {
 
 exec mako
 
-include /etc/sway/config.d/*
+#include /etc/sway/config.d/*
