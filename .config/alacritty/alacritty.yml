@@ -76,7 +76,7 @@ window:
   #
   # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
   # Set this to `None` to use the default theme variant.
-  gtk_theme_variant: None
+  gtk_theme_variant: light
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -193,9 +193,12 @@ colors:
     foreground: '0x373b41'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
+  #cursor:
+  #  text: '0xffffff'
+  #  cursor: '0x373b41'
   cursor:
-    text: '0xffffff'
-    cursor: '0x373b41'
+    text: '0x000000'
+    cursor: '0xffffff'
 
   # Normal colors
   normal:
@@ -326,7 +329,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-#background_opacity: 1.0
+background_opacity: 1.0
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -337,14 +340,14 @@ colors:
 # Allow terminal applications to change Alacritty's window title.
 #dynamic_title: true
 
-#cursor:
+cursor:
   # Cursor style
   #
   # Values for `style`:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  #style: Block
+  style: Block
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
