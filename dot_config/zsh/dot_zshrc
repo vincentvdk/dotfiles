@@ -1,0 +1,98 @@
+# source /usr/share/zsh-antigen/antigen.zsh
+DISABLE_MAGIC_FUNCTIONS=true
+source /opt/config/zsh/.antigen/antigen.zsh
+
+# Load the oh-my-zsh library
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle pip
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle fzf
+antigen theme romkatv/powerlevel10k
+# Tell Antigen that you're done.
+antigen apply
+
+# PATH
+export PATH="/opt/bin:$PATH"
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:$HOME/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin
+
+# -- Aliases ---------------------------------------
+# You can add other alias sources for custom stuff you don't want to share.
+alias go-reshim="asdf reshim golang && export GOV=\$(asdf current golang | awk '{print \$2}') && export GOROOT=\"\$ASDFINSTALLS/golang/\$GOV/go/\" && export GOPATH=\"\$ASDFINSTALLS/golang/\$GOV\""
+source /opt/config/zsh_aliases
+
+#alias tmux='tmux -s /tmp/${HOSTNAME} new' # tmux sessions in toolboxes are re-using existing sessions causing issues
+#alias dpg='cd ~/customers/dpg'
+#alias zoolite='cd ~/zoolite'
+#alias gi='~/.local/bin/grv'
+#alias aws-instances="aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | .Tags[]|select(.Key=="Name")|.Value'"
+
+# -- ssh-agent ----------------------------------------------------------------
+SSH_ENV="$HOME/.ssh/environment"
+
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+}
+
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+
+# -- Fuzzy finder --------------------------------------------------------------
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" ' 
+
+# -- ASDF
+. $ASDF_DIR/asdf.sh
+# -- Detect asdf-golang and set GOPATH and GOROOT
+function absolute_dir_path {
+  local absolute_path
+  absolute_path="$( cd -P "$( dirname "$1" )" && pwd )"
+  echo "$absolute_path"
+}
+
+asdf_update_golang_env() {
+  local go_path
+  go_path="$(asdf which go)"
+  if [[ -n "${go_path}" ]]; then
+    export GOROOT
+    GOROOT="$(dirname "$(absolute_dir_path "${go_path}")")"
+  fi
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook precmd asdf_update_golang_env
+
+# -- Initialize starship prompt
+# eval "$(starship init zsh)"
+
+## BEGIN NVM Block
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#export PATH=$PATH:$(yarn global bin) # needed for coc diagnostics-languageserver
+## END NVM Block
+
+# -- PROMPT
+source /opt/powerlevel10k/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit /opt/config/zsh/.p10k.zsh.
+[[ ! -f /opt/config/zsh/p10k.zsh ]] || source /opt/config/zsh/p10k.zsh
+alias vim="/opt/nvim/nvim.appimage"
+
+
+
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
