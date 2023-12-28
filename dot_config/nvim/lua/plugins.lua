@@ -4,8 +4,8 @@
 -- Print 'packpath' -> run :lua print(vim.o.packpath)
 
 -- Set Packer path
-local packer_path = vim.fn.stdpath('config') .. '/site'
-vim.o.packpath = vim.o.packpath .. ',' .. packer_path
+--local packer_path = vim.fn.stdpath('config') .. '/site'
+--vim.o.packpath = vim.o.packpath .. ',' .. packer_path
 
 -- Plugin install
 return require('packer').startup(function(use)
