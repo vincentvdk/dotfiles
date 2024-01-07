@@ -80,3 +80,7 @@ alias vim="/opt/nvim/nvim.appimage"
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 export EDOTOR=/opt/nvim/nvim.appimage
+# Powerlevel10k
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+source ${ZDOTDIR}/.p10k.zsh
+alias vim="/opt/nvim/nvim.appimage"

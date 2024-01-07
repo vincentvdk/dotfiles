@@ -1,5 +1,3 @@
--- Global config
-vim.g.mapleader = ','
 vim.o.encoding = "utf8"
 vim.o.modelines = 1
 vim.o.cmdheight = 2
@@ -35,7 +33,7 @@ vim.keymap.set('n', '<SPACE>', ':nohl<CR>', {desc = 'remove highlights'})
 -- Keep paste data in buffer when replacing (original string stays in buffer)
 vim.keymap.set('x', '<leader>p', "\"_dP")
 -- Need to check these
-vim.keymap.set('n', '<leader>p', "\"_d")
+--vim.keymap.set('n', '<leader>p', "\"_d")
 vim.keymap.set('v', '<leader>p', "\"_d")
 
 -- Handling brackets
@@ -84,6 +82,33 @@ require('nightfox').setup({
   }
 })
 
+-- Catppuccin theme options.
+require('catppuccin').setup({
+  flavour = "mocha",
+  background = { -- :h background
+    light = "latte",
+    dark = "mocha",
+  },
+  integrations = {
+    cmp = true,
+    gitsigns = true,
+    treesitter = true,
+  },
+  options = {
+    styles = {
+      comments = "italic",
+      keywords = "bold",
+      functions = "italic,bold",
+    },
+    inverse = {
+      match_paren = false, -- inverse the highlighting of match_paren
+    },
+    hlgroups = {
+      goOperator = { fg = "${yellow_dm}" },
+    }
+  }
+})
+
 -- Telescope ------------------------------------------------------------------
 require('telescope').setup({
   pickers = {
@@ -95,7 +120,8 @@ require('telescope').setup({
 })
 
 -- Load theme (needs to load after settings)
-vim.cmd("colorscheme nightfox")   -- https://github.com/EdenEast/nightfox.nvim
+-- vim.cmd("colorscheme nightfox")   -- https://github.com/EdenEast/nightfox.nvim
+vim.cmd("colorscheme catppuccin")
 
 -- highlights -----------------------------------------------------------------
 -- EXAMPLE
