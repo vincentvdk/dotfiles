@@ -1,11 +1,16 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
+session_serialization true
 keybinds {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
     }
+    // Custom
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
+        //custom
+        bind "Alt n" { NewPane; }
+        bind "Alt p" {GoToTab 2; SwitchToMode "Normal";}
     }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
@@ -156,6 +161,8 @@ keybinds {
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
+        //custom
+        bind "Alt p" {GoToTab 1; SwitchToMode "locked";}
     }
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
@@ -291,7 +298,8 @@ theme "catppuccin-mocha"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-// default_layout "compact"
+
+default_layout "editor"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
