@@ -17,7 +17,9 @@ export EDITOR="/opt/nvim/nvim.appimage"
 # You can add other alias sources for custom stuff you don't want to share.
 alias go-reshim="asdf reshim golang && export GOV=\$(asdf current golang | awk '{print \$2}') && export GOROOT=\"\$ASDFINSTALLS/golang/\$GOV/go/\" && export GOPATH=\"\$ASDFINSTALLS/golang/\$GOV\""
 alias k="kubectl"
-source /opt/config/zsh_aliases
+if [ -f ${ZDOTDIR}/.zsh_aliases ]; then
+  source /opt/config/zsh_aliases
+fi
 
 #alias tmux='tmux -s /tmp/${HOSTNAME} new' # tmux sessions in toolboxes are re-using existing sessions causing issues
 #alias dpg='cd ~/customers/dpg'
@@ -66,8 +68,9 @@ asdf_update_golang_env() {
   fi
 }
 
-#autoload -U add-zsh-hook
-#add-zsh-hook precmd asdf_update_golang_env
+# TODO: Only check when golang is installed
+autoload -U add-zsh-hook
+add-zsh-hook precmd asdf_update_golang_env
 
 ## BEGIN NVM Block
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -83,6 +86,7 @@ alias vim="/opt/nvim/nvim.appimage"
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 export EDOTOR=/opt/nvim/nvim.appimage
+
 # Powerlevel10k
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 source ${ZDOTDIR}/.p10k.zsh
