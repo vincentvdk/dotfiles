@@ -4,5 +4,7 @@
 -- file:close()
 
 -- "Lua config
-require("plugins")
+require("config.lazy") -- lazy.vim https://github.com/folke/lazy.nvim
+require("lazy").setup("plugins") -- Plugins managed with lazy.vim https://github.com/folke/lazy.nvim
+--require("plugins")
 require("base")
