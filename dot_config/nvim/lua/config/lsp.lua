@@ -5,12 +5,14 @@ vim.lsp.enable('gopls')
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
   callback = function(event)
-    -- Options
     local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    -- Enable native completion                                                                                                  
     if client:supports_method('textDocument/completion') then
       vim.opt.completeopt = {'menu', 'menuone', 'noinsert', 'fuzzy', 'popup'}
       vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
     end
+ 
     -- Key bindings
     local map = function(mode, keys, func, desc)
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
@@ -35,3 +37,35 @@ vim.diagnostic.config({
   --  current_line = true,
   --},
 })
+
+
+-- Completion keymaps (insert mode)
+vim.keymap.set('i', '<C-n>', function()
+  if vim.fn.pumvisible() == 1 then
+    return '<C-n>'
+  else
+    vim.lsp.completion.get()
+    return ''
+  end
+end, { expr = true, desc = 'Next completion or trigger' })
+
+vim.keymap.set('i', '<CR>', function()
+  return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
+end, { expr = true, desc = 'Accept completion or newline' })
+
+-- Snippet navigation
+vim.keymap.set({ 'i', 's' }, '<Tab>', function()
+  if vim.snippet.active({ direction = 1 }) then
+    vim.snippet.jump(1)
+    return ''
+  end
+  return '<Tab>'
+end, { expr = true, desc = 'Next snippet placeholder' })
+
+vim.keymap.set({ 'i', 's' }, '<S-Tab>', function()
+  if vim.snippet.active({ direction = -1 }) then
+    vim.snippet.jump(-1)
+    return ''
+  end
+  return '<S-Tab>'
+end, { expr = true, desc = 'Prev snippet placeholder' })
